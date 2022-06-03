@@ -20,7 +20,5 @@ import { Reports } from './reports/reports.entity';
     UsersModule,
     ReportsModule,
   ],
-  controllers: [UsersController, ReportsController],
-  providers: [UsersService, ReportsService],
 })
 export class AppModule {}
