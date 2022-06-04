@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from './users.entity';
 
 // User Service for Business Logic
-
 @Injectable()
 export class UsersService {
   // DI for our repo here, of type Users (via generic), and using InjectRepository to make generics work nicely
@@ -18,14 +17,27 @@ export class UsersService {
   }
 
   // find a single user
-  async findOne(id: string) {
-    const user = await this.repo.findOne(id);
+  findOne(id: string) {
+    const user = this.repo.findOne(id);
     return user;
   }
 
-  find() {}
+  // find all users with the criteria passed in
+  find(email: string) {
+    return this.repo.find({ email });
+  }
 
-  update() {}
+  // update a single user
+  async update(id: string, attrs: Partial<Users>) {
+    const currentUser = await this.findOne(id);
+    if (currentUser == null) {
+      throw new Error('User not found!');
+    }
+    // const updatedUser = { ...currentUser, ...attrs };
+    // using Object.assign to update original user
+    Object.assign(currentUser, attrs);
+    return this.repo.save(currentUser);
+  }
 
   remove() {}
 }

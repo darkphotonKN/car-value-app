@@ -5,3 +5,16 @@ Content-Type: application/json
   "email": "test@wow.com",
   "password": "password"
 }
+
+
+### Get Single User
+GET http://localhost:3000/auth/user?id=1
+
+### Updates a Single User 
+POST http://localhost:3000/auth/user
+Content-Type: application/json
+
+{
+  "id": "1",
+  "user": {"email": "test@working.com"}
+}
