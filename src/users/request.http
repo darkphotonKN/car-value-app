@@ -2,8 +2,8 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "test@wow.com",
-  "password": "password"
+  "email": "doggo@doge.com",
+  "password": "321"
 }
 
 
@@ -14,13 +14,13 @@ GET http://localhost:3000/auth/user/3
 GET http://localhost:3000/auth/user?email=updated@omg.com
 
 ### Updates a Single User 
-PATCH http://localhost:3000/auth/user
+PATCH http://localhost:3000/auth/user/4
 Content-Type: application/json
 
 {
-  "id": "1",
-  "user": {"email": "testtestesttest@working.com"}
+  "email": "dog@bitch.com",
+  "password": "wuutt"
 }
 
 ### Deletes a Single User
-GET  http://localhost:3000/auth/deleteUser?id=2
+DELETE  http://localhost:3000/auth/deleteUser/5

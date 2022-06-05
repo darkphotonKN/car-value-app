@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   // find a single user
-  findOne(id: string) {
+  findOne(id: number) {
     const user = this.repo.findOne(id);
     return user;
   }
@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   // update a single user
-  async update(id: string, attrs: Partial<Users>) {
+  async update(id: number, attrs: Partial<Users>) {
     const currentUser = await this.findOne(id);
     if (currentUser == null) {
       throw new Error('User not found!');
@@ -40,7 +40,7 @@ export class UsersService {
   }
 
   // find user entity then remove it
-  async remove(id: string) {
+  async remove(id: number) {
     // using remove works with entities are allows for tools like hooks
     // to work - using delete() means one less trip to get the entity
     // first but losing out on the hook utilities
