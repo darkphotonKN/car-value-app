@@ -39,5 +39,15 @@ export class UsersService {
     return this.repo.save(currentUser);
   }
 
-  remove() {}
+  // find user entity then remove it
+  async remove(id: string) {
+    // using remove works with entities are allows for tools like hooks
+    // to work - using delete() means one less trip to get the entity
+    // first but losing out on the hook utilities
+    const user = await this.findOne(id); // find a single user entity
+    if (user == null) {
+      throw new Error('User not found!');
+    }
+    this.repo.remove(user);
+  }
 }

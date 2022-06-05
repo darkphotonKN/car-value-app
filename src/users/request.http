@@ -8,13 +8,19 @@ Content-Type: application/json
 
 
 ### Get Single User
-GET http://localhost:3000/auth/user?id=1
+GET http://localhost:3000/auth/user/3
+
+### Get all Users based on Email
+GET http://localhost:3000/auth/user?email=updated@omg.com
 
 ### Updates a Single User 
-POST http://localhost:3000/auth/user
+PATCH http://localhost:3000/auth/user
 Content-Type: application/json
 
 {
   "id": "1",
-  "user": {"email": "test@working.com"}
+  "user": {"email": "testtestesttest@working.com"}
 }
+
+### Deletes a Single User
+GET  http://localhost:3000/auth/deleteUser?id=2
