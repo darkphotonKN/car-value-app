@@ -6,9 +6,8 @@ Content-Type: application/json
   "password": "321"
 }
 
-
 ### Get Single User
-GET http://localhost:3000/auth/user/3
+GET http://localhost:3000/auth/user/1
 
 ### Get all Users based on Email
 GET http://localhost:3000/auth/user?email=updated@omg.com

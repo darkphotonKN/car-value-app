@@ -7,10 +7,14 @@ import {
   Post,
   Param,
   Query,
+  UseInterceptors,
+  // ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
+// custom serialize interceptor
+import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 
 @Controller('auth')
 export class UsersController {
@@ -25,10 +29,15 @@ export class UsersController {
   }
 
   // gets data on a single user
+  // NestJS docs recommended way, but ill build a custom method that
+  // will prove to be more flexible
+  // @UseInterceptors(ClassSerializerInterceptor) // serializes the response from using GET
+  // custom interceptor
+  @UseInterceptors(SerializeInterceptor)
   @Get('/user/:id')
   async findUser(@Param('id') id: string) {
     // decorator grabs the id query out and sticks it into the parameter
-    console.log('Param:', id);
+    console.log('Attempting to find user');
     return await this.usersService.findOne(parseInt(id));
   }
 
