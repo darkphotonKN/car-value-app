@@ -14,17 +14,22 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 // custom serialize interceptor
-import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
+import {
+  Serialize,
+  SerializeInterceptor,
+} from 'src/interceptors/serialize.interceptor';
+import { UserDto } from './dto/user.dto';
 
+@Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   // signs up user
   @Post('/signup') // extracting Body as an argument, type-checking it for validation with the CreateUserDTO
-  async createUser(@Body() body: CreateUserDto) {
+  createUser(@Body() body: CreateUserDto) {
     const { email, password } = body;
-    await this.usersService.create(email, password);
+    this.usersService.create(email, password);
     return { status: 200, message: 'User was created!' };
   }
 
@@ -33,7 +38,7 @@ export class UsersController {
   // will prove to be more flexible
   // @UseInterceptors(ClassSerializerInterceptor) // serializes the response from using GET
   // custom interceptor
-  @UseInterceptors(SerializeInterceptor)
+  // @Serialize(UserDto) // moved this to top level as the entire controller handles users
   @Get('/user/:id')
   async findUser(@Param('id') id: string) {
     // decorator grabs the id query out and sticks it into the parameter

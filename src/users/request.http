@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ### Get Single User
-GET http://localhost:3000/auth/user/1
+GET http://localhost:3000/auth/user/3
 
 ### Get all Users based on Email
 GET http://localhost:3000/auth/user?email=updated@omg.com
