@@ -1,9 +1,19 @@
+### Sign up a new user
 POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "doggo@doge.com",
-  "password": "321"
+  "email": "whyyyy@working.com",
+  "password": "pooptastic"
+}
+
+### Attempt to sign in user
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{ 
+  "email": "whyyyy@working.com", 
+  "password": "pooptastic"
 }
 
 ### Get Single User
@@ -22,4 +32,4 @@ Content-Type: application/json
 }
 
 ### Deletes a Single User
-DELETE  http://localhost:3000/auth/deleteUser/5
+DELETE  http://localhost:3000/auth/deleteUser/6

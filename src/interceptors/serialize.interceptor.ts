@@ -37,9 +37,9 @@ export class SerializeInterceptor implements NestInterceptor {
         return plainToClass(
           this.dto,
           data,
-          // options - excludeExtraneousValues allows every field
-          // in a DTO to be serialized UNLESS IT IS MARKED AS
-          // EXPOSED (in the DTO file @Expose())
+          // options - excludeExtraneousValues makes every field
+          // in a DTO  serialized UNLESS IT IS MARKED AS EXPOSED
+          // (in the DTO file @Expose())
           {
             excludeExtraneousValues: true,
           },

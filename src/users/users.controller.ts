@@ -12,25 +12,36 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersService } from './users.service';
 // custom serialize interceptor
 import {
   Serialize,
   SerializeInterceptor,
 } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
+import { UsersService } from './users.service';
+import { AuthService } from './auth.service';
 
 @Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService,
+  ) {}
 
   // signs up user
   @Post('/signup') // extracting Body as an argument, type-checking it for validation with the CreateUserDTO
   createUser(@Body() body: CreateUserDto) {
     const { email, password } = body;
-    this.usersService.create(email, password);
+    this.authService.signUp(email, password);
     return { status: 200, message: 'User was created!' };
+  }
+
+  // signs in user
+  @Post('/signin')
+  signinUser(@Body() body: CreateUserDto) {
+    const { email, password } = body;
+    return this.authService.signIn(email, password);
   }
 
   // gets data on a single user
